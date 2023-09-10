@@ -24,7 +24,6 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ProductResource extends Resource
@@ -70,7 +69,7 @@ class ProductResource extends Resource
                     TextInput::make('price')
                         ->required()
                         ->numeric()
-                        ->rules('regex:/^\d{1,6}(\.\d{0,2})?$/'),
+                        ->rules('regex:/^\d{1,10}(\.\d{0,2})?$/'),
 
                     TextInput::make('quantity')
                         ->required()
@@ -122,12 +121,34 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image'),
-                TextColumn::make('name'),
-                TextColumn::make('brand.name'),
-                IconColumn::make('is_visible')->boolean(),
-                TextColumn::make('price'),
-                TextColumn::make('quantity'),
-                TextColumn::make('published_at'),
+
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('brand.name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+
+                IconColumn::make('is_visible')
+                    ->label('Visibility')
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable(),
+
+                TextColumn::make('price')
+                    ->sortable()
+                    ->toggleable(),
+
+                TextColumn::make('quantity')
+                    ->sortable()
+                    ->toggleable(),
+
+                TextColumn::make('published_at')
+                    ->date()
+                    ->sortable(),
+
                 TextColumn::make('type'),
             ])
             ->filters([
