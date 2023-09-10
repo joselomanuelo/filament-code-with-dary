@@ -41,7 +41,7 @@ class ProductResource extends Resource
                 Section::make()->schema([
                     TextInput::make('name')
                         ->required()
-                        ->unique()
+                        ->unique(ignoreRecord: true)
                         ->live(onBlur: true)
                         ->afterStateUpdated(function (string $operation, string $state, Set $set) {
                             if ($operation !== 'create') {
@@ -53,7 +53,7 @@ class ProductResource extends Resource
 
                     TextInput::make('slug')
                         ->required()
-                        ->unique(Product::class, 'slug', ignoreRecord: true)
+                        ->unique(ignoreRecord: true)
                         ->disabled()
                         ->dehydrated(),
 
@@ -63,7 +63,7 @@ class ProductResource extends Resource
                 Section::make('Pricing and Inventory')->schema([
                     TextInput::make('sku')
                         ->required()
-                        ->unique()
+                        ->unique(ignoreRecord: true)
                         ->label('SKU (Stock Keeping Unit)'),
 
                     TextInput::make('price')
