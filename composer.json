@@ -18,6 +18,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.26",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
@@ -51,6 +52,12 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "fixer": [
+            "vendor/bin/php-cs-fixer fix --config=.php-fixer.php"
+        ],
+        "linter": [
+            "vendor/bin/php-cs-fixer fix --config=.php-fixer.php --dry-run --stop-on-violation"
         ]
     },
     "extra": {
