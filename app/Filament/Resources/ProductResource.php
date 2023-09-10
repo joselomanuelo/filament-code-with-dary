@@ -23,6 +23,8 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
@@ -152,7 +154,15 @@ class ProductResource extends Resource
                 TextColumn::make('type'),
             ])
             ->filters([
-                //
+                TernaryFilter::make('is_visible')
+                    ->label('Visibility')
+                    ->boolean()
+                    ->trueLabel('Only visible products')
+                    ->falseLabel('Only hidden products')
+                    ->native(false),
+
+                SelectFilter::make('brand')
+                    ->relationship('brand', 'name')
             ])
             ->actions([
                 EditAction::make(),
