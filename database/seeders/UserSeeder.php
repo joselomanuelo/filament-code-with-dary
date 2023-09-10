@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Brand;
-use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 

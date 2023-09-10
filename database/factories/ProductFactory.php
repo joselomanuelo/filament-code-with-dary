@@ -14,7 +14,7 @@ class ProductFactory extends Factory
             'slug' => fake()->unique()->slug(),
             'sku' => fake()->unique()->userName(),
             'quantity' => fake()->randomNumber(3),
-            'price' => fake()->randomFloat(2,0, 100000),
+            'price' => fake()->randomFloat(2, 0, 100000),
             'published_at' => now()
         ];
     }
