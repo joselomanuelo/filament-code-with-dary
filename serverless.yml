@@ -1,0 +1,37 @@
+service: laravel
+
+provider:
+    name: aws
+    region: us-east-1
+    environment:
+        APP_ENV: production
+
+package:
+    patterns:
+        - '!node_modules/**'
+        - '!public/storage'
+        - '!resources/assets/**'
+        - '!storage/**'
+        - '!tests/**'
+
+functions:
+
+    web:
+        handler: public/index.php
+        runtime: php-81-fpm
+        timeout: 28
+        events:
+            - httpApi: '*'
+
+    artisan:
+        handler: artisan
+        runtime: php-81-console
+        timeout: 720
+        # Uncomment to also run the scheduler every minute
+        #events:
+        #    - schedule:
+        #          rate: rate(1 minute)
+        #          input: '"schedule:run"'
+
+plugins:
+    - ./vendor/bref/bref
