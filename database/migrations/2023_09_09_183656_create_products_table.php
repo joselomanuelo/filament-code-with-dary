@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('sku')->unique();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('quantity');
             $table->decimal('price', 10);
